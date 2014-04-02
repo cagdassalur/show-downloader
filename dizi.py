@@ -10,6 +10,8 @@ f.close()
 #with open('output.txt', 'w') as f: f.write(st)
 ar = st.split('\n')
 st_out = ''
+
+foundCount = 0
 for line in ar:
 	line = line.split(';')
 	isim = line[0].replace(' ', '%20')
@@ -28,12 +30,18 @@ for line in ar:
 			if epn > ep:
 				if( (epn not in inenler) and
 					#raw_input(isim + '/' + str(epn) + ' bulundu. indir? [y-n]').lower() == 'y'):
-					True:
+					True):
 					os.system("open "+magnet)
 					inenler.append(epn)
+					foundCount += 1
 	
 	for i in xrange(len(ar)):
 		if isim in ar[i]: 
 			ar[i] = isim + ';' + str(max(inenler))
-with open('dizi.txt','w') as f: f.write('\n'.join(ar))
+if foundCount == 0:
+	print 'No new episodes.'
+else:
+	print str(foundCount) + ' new episodes downloaded.'
+	with open('dizi.txt','w') as f: f.write('\n'.join(ar))
+	raw_input()
 
